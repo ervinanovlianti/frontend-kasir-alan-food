@@ -1,42 +1,40 @@
-/* src/components/Navbar.css */
-
-/* Bagian atas Navbar (nav-brand) */
 .navbar {
-  background-color: #2bb8ff; /* Warna latar belakang Navbar */
-  color: white; /* Warna teks Navbar */
+  background-color: #2bb8ff;
+  color: white;
   padding: 1px;
 
 }
-.nav-brand{
+
+.nav-brand {
   margin-left: 50px;
 }
 
-/* Bagian bawah Navbar (nav-menu) */
 .nav-menu {
-  background-color: #ffffff; /* Warna latar belakang bagian bawah Navbar */
+  background-color: #ffffff;
   list-style-type: none;
-  padding: 10px 0; /* Padding hanya pada bagian bawah Navbar */
+  padding: 10px 0;
   display: flex;
   color: black;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Efek shadow bawah */
+  margin: 0;
+  margin-bottom: 20px;
+  /* margin-right: 0; */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .nav-item {
-  margin-right: 20px;
-  margin-left: 50px;
+  /* margin-right: 0; */
+  margin-left: 60px;
 }
 
 .nav-item:last-child {
-  margin-right: 0;
+  /* margin-right: 0; */
 }
 
-/* Ganti warna teks tautan pada nav-menu */
 .nav-item a {
   text-decoration: none;
-  color: rgb(0, 0, 0); /* Warna teks tautan */
+  color: rgb(0, 0, 0);
 }
 
 .nav-item a:hover {
-  /* text-decoration: underline; */
   color: #2bb8ff;
 }

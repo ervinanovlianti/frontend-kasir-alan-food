@@ -1,57 +1,132 @@
-.container {
-    margin-left: 50px;
+.food-container {
+    margin-left: 200px;
+}
+table{
+    margin-top: 20px;
 }
 
-th.id{
+th.id {
     width: 5vw;
     text-align: center;
     padding: 10px;
-    border: 1px solid black;
-    border-collapse: collapse;
 }
-th.nama{
-    width: 50vw;
+
+th.nama {
+    width: 40vw;
     text-align: center;
     padding: 10px;
-    border: 1px solid black;
-    border-collapse: collapse;
 }
-th.gambar{
-    width: 20vw;
-    text-align: center;
-    padding: 10px;
-    border: 1px solid black;
-    border-collapse: collapse;
-}
-th.harga{
+
+th.gambar {
     width: 10vw;
     text-align: center;
     padding: 10px;
-    border: 1px solid black;
-    border-collapse: collapse;
 }
-tbody{
+
+th.harga {
+    width: 20vw;
+    text-align: center;
+    padding: 10px;
+}
+
+tbody {
     border: 2px solid black;
     border-collapse: collapse;
     padding: 10px;
 }
-tr{
+
+tr {
     border: 1px solid black;
 }
 
-td{
-    border: 1px solid black;
-    border-collapse: collapse;
+tr {
+    padding: 20px;
+}
+
+tr:hover {
+    cursor: pointer;
+    background-color: #b4b4b4;
+}
+
+td {
     padding: 10px;
 }
 
 .button {
-  background-color: #2bb8ff; /* Warna latar belakang tombol */
-  color: white; /* Warna teks tombol */
-  padding: 5px; /* Sesuaikan dengan preferensi */
-  margin-right: 10px;
-  border-radius: 5px;
-  cursor: pointer;
-  border: none;
-  margin-bottom: 10px;
+    background-color: #2bb8ff;
+    color: white;
+    padding: 5px;
+    margin-right: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    /* margin-bottom: 20px; */
+  text-decoration: none;
+
+}
+
+/* CSS untuk container kartu makanan */
+.food-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.container-foods {
+    margin-left: 100px;
+    width: 80%;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.table-title {
+    font-weight: bold;
+    align-items: center;
+}
+
+.image-table {
+    width: 100px;
+    align-self: ce;
+}
+
+/* CSS untuk kartu makanan (FoodCard) */
+.card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: calc(25% - 1px);
+    /* Ukuran kartu dengan margin */
+    margin: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+/* Styling untuk gambar makanan */
+.food-image {
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+/* Lebar untuk kartu makanan */
+.food-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    width: 80%;
+}
+
+.order-summary {
+    width: 40%;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 8px;
 }

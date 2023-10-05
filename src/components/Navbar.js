@@ -7,11 +7,9 @@ const Navbar = () => {
     return (
         <nav>
             <div className="navbar">
-                {/* Bagian atas Navbar (nav-brand) */ }
                 <h1 className="nav-brand">Alan Food</h1>
             </div>
             <ul className="nav-menu">
-                {/* Bagian bawah Navbar (nav-menu) */ }
                 <li className="nav-item">
                     <Link to="/food">Food</Link>
                 </li>
