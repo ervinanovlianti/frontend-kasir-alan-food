@@ -1,0 +1,57 @@
+.container {
+    margin-left: 50px;
+}
+
+th.id{
+    width: 5vw;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th.nama{
+    width: 50vw;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th.gambar{
+    width: 20vw;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th.harga{
+    width: 10vw;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+tbody{
+    border: 2px solid black;
+    border-collapse: collapse;
+    padding: 10px;
+}
+tr{
+    border: 1px solid black;
+}
+
+td{
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 10px;
+}
+
+.button {
+  background-color: #2bb8ff; /* Warna latar belakang tombol */
+  color: white; /* Warna teks tombol */
+  padding: 5px; /* Sesuaikan dengan preferensi */
+  margin-right: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+  margin-bottom: 10px;
+}
