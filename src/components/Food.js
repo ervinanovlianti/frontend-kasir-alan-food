@@ -1,62 +1,38 @@
 // src/components/Food.js
-import React from 'react';
-import FoodList from './FoodList';
 import './Food.css';
 import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
-const staticMenuData = [
-    {
-        id: 1,
-        name: 'Nasi Goreng',
-        price: 15.000,
-        image: 'nasi-goreng.jpg',
-    },
-    {
-        id: 3,
-        name: 'Ayam Goreng',
-        price: 10.000,
-        image: 'ayam-goreng.jpeg',
-    },
-    {
-        id: 2,
-        name: 'Mie Ayam',
-        price: 10.000,
-        image: 'ayam-goreng.jpeg',
-    },
-    {
-        id: 2,
-        name: 'Mie Ayam',
-        price: 10.000,
-        image: 'ayam-goreng.jpeg',
-    },
-    {
-        id: 2,
-        name: 'Mie Ayam',
-        price: 10.000,
-        image: 'ayam-goreng.jpeg',
-    },
-    {
-        id: 2,
-        name: 'Mie Ayam',
-        price: 10.000,
-        image: 'ayam-goreng.jpeg',
-    },
-    {
-        id: 2,
-        name: 'Mie Ayam',
-        price: 10.000,
-        image: 'ayam-goreng.jpeg',
-    },
-    {
-        id: 2,
-        name: 'Mie Ayam',
-        price: 10.000,
-        image: 'ayam-goreng.jpeg',
-    },
-];
 
 
 const Food = () => {
+    const [menus, setMenus] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        // Mengambil data menu makanan dari API Laravel
+        axios.get('http://localhost:8000/api/menus')
+            .then((response) => {
+                setMenus(response.data.data); // Menyimpan data JSON ke dalam state (response.data.data mengacu pada data menu)
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                setLoading(false);
+            });
+    }, []);
+
+    if (loading)
+    {
+        return <div>Mengambil data...</div>;
+    }
+
+    if (!menus.length)
+    {
+        return <div>Tidak ada data menu.</div>;
+    }
+
     return (
         <div className="container-foods">
             <h2>Daftar Menu Makanan</h2>
@@ -72,14 +48,15 @@ const Food = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        { staticMenuData.map(food => (
-                            <FoodList
-                                key={ food.id }
-                                id={ food.id }
-                                image={ food.image }
-                                name={ food.name }
-                                price={ food.price }
-                            />
+                        { menus.map((menu) => (
+                            <tr key={ menu.id }>
+                                <td>{ menu.id }</td>
+                                <td>{ menu.name }</td>
+                                <td>
+                                    <img src={ process.env.PUBLIC_URL + `/images/${menu.image}` } alt={ menu.name } width="100" />
+                                </td>
+                                <td>Rp. { menu.price }</td>
+                            </tr>
                         )) }
                     </tbody>
                 </table>
@@ -88,5 +65,6 @@ const Food = () => {
         </div>
     );
 };
+
 
 export default Food;
