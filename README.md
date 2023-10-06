@@ -1,4 +1,4 @@
-# DOKUMENTSI APLIKASI FRONTEND ALAN FOOD
+# DOKUMENTASI APLIKASI FRONTEND ALAN FOOD
 ## Pendahuluan
 Selamat datang di dokumentasi fitur frontend aplikasi kasir Alan Food.  Dokumen ini memberikan informasi tentang cara menggunakan antarmuka pengguna (UI) aplikasi ini.
 
