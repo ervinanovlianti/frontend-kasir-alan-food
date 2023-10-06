@@ -1,86 +1,253 @@
-// src/components/Food.js
-import React from 'react';
-import FoodCard from './FoodCard'; // Impor komponen FoodCard
+import React, { useState, useEffect } from 'react';
 import './Food.css';
+import axios from 'axios';
 
 
 const Transaksi = () => {
-    const foodData = [
+    const [menus, setMenus] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [pesanan, setPesanan] = useState([]);
+    const [showSavedModal, setShowSavedModal] = useState(false);
+    const [showChargeModal, setShowChargeModal] = useState(false);
+    const [uangPembeli, setUangPembeli] = useState('');
+    const [kembalian, setKembalian] = useState(0);
+
+    const API_BASE_URL = 'http://localhost:8000';
+
+    useEffect(() => {
+        // Mengambil data menu makanan dari API Laravel
+        axios.get(`${API_BASE_URL}/api/menus`)
+            .then((response) => {
+                setMenus(response.data.data); // Menyimpan data JSON ke dalam state (response.data.data mengacu pada data menu)
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                setLoading(false);
+            });
+    }, []);
+
+    if (loading){
+        return <div>Mengambil data...</div>;
+    }
+
+    if (!menus.length){
+        return <div>Tidak ada data menu.</div>;
+    }
+
+    const tambahKePesananSementara = (menu) => {
+        // Salin pesanan sementara yang ada
+        const pesananBaru = { ...pesanan };
+
+        // Periksa apakah menu sudah ada di pesanan
+        if (pesananBaru[menu.id])
         {
-            id: 1,
-            name: 'Nasi Goreng',
-            price: 15.000,
-            image: 'nasi-goreng.jpg',
-        },
+            // Jika sudah ada, tambahkan 1 ke jumlahnya
+            pesananBaru[menu.id] += 1;
+        } else
         {
-            id: 3,
-            name: 'Ayam Goreng',
-            price: 10.000,
-            image: 'ayam-goreng.jpeg',
-        },
+            // Jika belum ada, buat entri baru dengan jumlah 1
+            pesananBaru[menu.id] = 1;
+        }
+
+        // Perbarui state pesanan
+        setPesanan(pesananBaru);
+    };
+    const hitungSubtotal = (menuId) => {
+        const menu = menus.find((menu) => menu.id === parseInt(menuId, 10));
+        const quantity = pesanan[menuId];
+        return menu.price * quantity;
+    };
+
+    // Fungsi untuk menghitung subtotal keseluruhan
+    const hitungSubtotalKeseluruhan = () => {
+        let total = 0;
+        Object.keys(pesanan).forEach((menuId) => {
+            total += hitungSubtotal(menuId);
+        });
+        return total;
+    };
+
+    // Fungsi untuk membersihkan pesanan sementara
+    const clearCart = () => {
+        setPesanan({}); // Mengatur pesanan kembali ke objek kosong
+    };
+
+    const printBill = () => {
+        window.print(); // Memanggil fungsi pencetakan bawaan browser
+    };
+    const handleSaveBill = () => {
+        setShowSavedModal(true);
+
+        // Atur waktu untuk menutup modal setelah beberapa detik (opsional)
+        setTimeout(() => {
+            setShowSavedModal(false);
+        }, 3000); // Contoh menutup modal setelah 3 detik
+    };
+
+    // Fungsi untuk menampilkan atau menyembunyikan modal "Total Charge"
+    const toggleChargeModal = () => {
+        setShowChargeModal(!showChargeModal);
+    };
+
+    // Fungsi untuk menghitung kembalian
+    const hitungKembalian = (uangPembeliInput) => {
+        const totalCharge = hitungSubtotalKeseluruhan();
+        const uangPembeliNumber = parseFloat(uangPembeliInput.replace(/[,]/g, ''));
+
+        if (!isNaN(uangPembeliNumber))
         {
-            id: 2,
-            name: 'Mie Ayam',
-            price: 10.000,
-            image: 'ayam-goreng.jpeg',
-        },
+            const totalKembalian = uangPembeliNumber - totalCharge;
+            setKembalian(totalKembalian.toLocaleString('id-ID')); 
+        } else
         {
-            id: 2,
-            name: 'Mie Ayam',
-            price: 10.000,
-            image: 'ayam-goreng.jpeg',
-        },
+            setKembalian(0);
+        }
+    };
+
+    const handlePay = () => {
+        const total = hitungSubtotalKeseluruhan();
+        const uangPembeliNumber = parseFloat(uangPembeli.replace(/[,.]/g, ''));
+
+        if (!isNaN(uangPembeliNumber) && uangPembeliNumber >= total)
         {
-            id: 2,
-            name: 'Mie Ayam',
-            price: 10.000,
-            image: 'ayam-goreng.jpeg',
-        },
+            const kembalianValue = uangPembeliNumber - total;
+
+            // Konversi pesanan menjadi array order_items
+            const orderItems = Object.keys(pesanan).map((menuId) => ({
+                menu_id: menuId,
+                quantity: pesanan[menuId],
+            }));
+
+            // Kirim data pesanan ke backend
+            axios
+                .post(`${API_BASE_URL}/api/orders`, {
+                    total: total,
+                    uang_pembeli: uangPembeliNumber,
+                    kembalian: kembalianValue,
+                    order_items: orderItems, // Menggunakan array order_items yang telah dibuat
+                })
+                .then((response) => {
+                    console.log('Pesanan berhasil disimpan:', response.data);
+                    toggleChargeModal(); 
+                    clearCart();
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    // Handle error, misalnya menampilkan pesan kesalahan kepada pengguna
+                });
+        } else
         {
-            id: 2,
-            name: 'Mie Ayam',
-            price: 10.000,
-            image: 'ayam-goreng.jpeg',
-        },
-        {
-            id: 2,
-            name: 'Mie Ayam',
-            price: 10.000,
-            image: 'ayam-goreng.jpeg',
-        },
-        {
-            id: 2,
-            name: 'Mie Ayam',
-            price: 10.000,
-            image: 'ayam-goreng.jpeg',
-        },
-    ];
+            alert('Uang pembeli tidak mencukupi.');
+        }
+    };
 
     return (
-        
         <div className="container">
             <div className="food-cards">
-                { foodData.map(food => (
-                    <FoodCard
-                        key={ food.id }
-                        image={ food.image }
-                        name={ food.name }
-                        price={ food.price }
-                    />
+                { menus.map((menu) => (
+                    <div className="card" key={ menu.id } onClick={ () => tambahKePesananSementara(menu) }>
+                        <img src={ process.env.PUBLIC_URL + `/images/${menu.image}` } alt={ `Gambar ${menu.name}` } className="food-image" />
+                        <p className="food-name">{ menu.name }</p>
+                        <p className="food-price">Rp. { menu.price.toLocaleString('id-ID') }</p>
+                    </div>
                 )) }
             </div>
             <div className="order-summary">
+                <h3>Pesanan</h3>
                 <table>
-                    <h3 className="table-title">Pesanan</h3>
                     <tbody>
-                            <tr>
-                                <td>Image</td>
-                                <td>Ayam Bakar</td>
-                                <td>x1</td>
-                                <td>11.000</td>
+                        { Object.keys(pesanan).map((menuId) => (
+                            <tr key={ menuId }>
+                                <td><img src={ process.env.PUBLIC_URL + `/images/${menus.find((menu) => menu.id === parseInt(menuId, 10)).image}` } alt={ menus.find((menu) => menu.id === parseInt(menuId, 10)).name } width="100" />
+                                </td>
+                                <td>{ menus.find((menu) => menu.id === parseInt(menuId, 10)).name }</td>
+                                <td>{ pesanan[menuId] }</td>
+                                <td>Rp. { hitungSubtotal(menuId) }</td>
                             </tr>
+                        )) }
                     </tbody>
                 </table>
+                <div className="action-buttons">
+                    <button onClick={ clearCart } className='button'>Clear Cart</button>
+                    <button onClick={ printBill } className='button'>Print Bill</button>
+                    <button onClick={ handleSaveBill } className='button'>Save Bill</button> 
+                </div>
+                <div className="subtotal" style={ { marginTop: '20px' } }>
+                    <button className='button' onClick={ toggleChargeModal }>Charge Rp. { hitungSubtotalKeseluruhan().toLocaleString('id-ID') }</button>
+                </div>
+            </div>
+            { showSavedModal && (
+                <div className="modal">
+                    <div className="modal-content">
+                        <p>Bill Saved</p>
+                        <button onClick={ () => setShowSavedModal(false) }>OK</button>
+                    </div>
+                </div>
+            ) }
+
+            {/* Modal "Total Charge" */ }
+            <div className={ `modal ${showChargeModal ? 'active' : ''}` }>
+                <div className="modal-content">
+                    <h3>Detail Pesanan</h3>
+                    <div className="table-and-input">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Gambar</th>
+                                    <th>Makanan</th>
+                                    <th>Jumlah</th>
+                                    <th>Harga</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                { Object.keys(pesanan).map((menuId) => (
+                                    <tr key={ menuId }>
+                                        <td>{ + 1 }</td>
+                                        <td>
+                                            <img
+                                                src={
+                                                    process.env.PUBLIC_URL +
+                                                    `/images/${menus.find(
+                                                        (menu) => menu.id === parseInt(menuId, 10)
+                                                    ).image}`
+                                                }
+                                                alt={
+                                                    menus.find(
+                                                        (menu) => menu.id === parseInt(menuId, 10)
+                                                    ).name
+                                                }
+                                                width="100"
+                                            />
+                                        </td>
+                                        <td>
+                                            { menus.find((menu) => menu.id === parseInt(menuId, 10)).name }
+                                        </td>
+                                        <td>{ pesanan[menuId] }</td>
+                                        <td>Rp. { hitungSubtotal(menuId).toLocaleString('id-ID') }</td>
+                                    </tr>
+                                )) }
+                            </tbody>
+                        </table>
+                        <div className="uang-pembeli-input">
+                            <h5>Uang Pembeli (Rp)</h5>
+                            <input
+                                type="text"
+                                placeholder="Uang Pembeli"
+                                value={ uangPembeli }
+                                onChange={ (e) => {
+                                    const inputValue = e.target.value;
+                                    setUangPembeli(inputValue);
+                                    hitungKembalian(inputValue);
+                                } }
+                            />
+                            <p>Kembalian: Rp. { kembalian.toLocaleString('id-ID') }</p>
+                            <button className='button' onClick={ toggleChargeModal }>Close</button>
+                            <button onClick={ handlePay }>Pay</button> {/* Tombol Pay */ }
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     );
