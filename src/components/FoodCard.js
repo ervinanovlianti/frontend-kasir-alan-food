@@ -8,7 +8,7 @@ const FoodCard = ({ image, name, price }) => {
         <div className="card">
             <img src={ imagePath } alt={ `Gambar ${name}` } className="food-image" />
             <p className="food-name">{ name }</p>
-            <p className="food-price">Rp. { price.toFixed(3) }</p>
+            <p className="food-price">Rp. { price}</p>
         </div>
     );
 };

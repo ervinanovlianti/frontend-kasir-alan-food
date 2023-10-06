@@ -130,3 +130,48 @@ td {
     padding: 20px;
     border-radius: 8px;
 }
+
+/* CSS untuk modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0; /* Atur ketinggian awal menjadi 0 */
+  background-color: rgba(0, 0, 0, 0.5); /* Latar belakang semi-transparan */
+  overflow: hidden;
+  transition: height 0.3s ease; /* Efek transisi ketinggian */
+}
+
+/* CSS untuk konten modal */
+.modal-content {
+  position: relative;
+  background-color: #fff;
+  margin: 50px auto; /* Jarak dari atas */
+  padding: 20px;
+  border-radius: 5px;
+  width: 60%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-100%); /* Memindahkan konten ke atas */
+  transition: transform 0.3s ease;
+}
+
+/* CSS untuk menampilkan modal */
+.modal.active {
+  height: 100%; /* Munculkan modal dengan mengatur ketinggian ke 100% */
+}
+
+/* CSS untuk menampilkan konten modal */
+.modal.active .modal-content {
+  transform: translateY(0); /* Tampilkan konten modal dengan mengatur transformasi ke 0 */
+}
+
+/* CSS untuk mengatur tampilan input uang pembeli */
+.uang-pembeli-input {
+  margin-left: 20px; /* Memberi jarak antara tabel dan input */
+}
+/* CSS untuk mengatur tampilan tabel */
+.table-and-input {
+  display: flex; /* Menggunakan display flex untuk mengatur konten berdampingan */
+  align-items: center; /* Menyelaraskan item ke tengah vertikal */
+}
