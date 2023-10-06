@@ -175,3 +175,100 @@ td {
   display: flex; /* Menggunakan display flex untuk mengatur konten berdampingan */
   align-items: center; /* Menyelaraskan item ke tengah vertikal */
 }
+
+
+.button-success {
+    background-color: #029437;
+    color: white;
+    padding: 5px;
+    margin-right: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+}
+
+.button-close {
+    background-color: #cecece;
+    /* color: white; */
+    padding: 5px;
+    margin-right: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+}
+
+
+.error-message {
+  color: #ff0000;
+  margin-top: 10px;
+  font-size: 0.875rem;
+}
+
+.block-button {
+  width: 100%;
+  background-color: #53a6ff;
+  color: #fff;
+  padding: 5px 20px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+.clear-button {
+  width: 100%;
+  color: #d10000;
+ background-color: transparent;
+  color: #ff0000; /* Warna teks putih */
+  border: 2px solid red; /* Border merah 2px */
+  padding: 5px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.custom-button-success {
+  background-color: green; /* Warna latar belakang hijau */
+  color: #fff; /* Warna teks putih */
+  border: 2px solid #008000; /* Border hijau 2px */
+  padding: 5px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  width: 48%; /* Mengatur lebar tombol */
+  box-sizing: border-box; /* Menyertakan padding dan border dalam perhitungan lebar */
+}
+
+
+.block-button:hover {
+  background-color: #0056b3;
+}
+.action-buttons {
+  display: flex; /* Mengatur tampilan menjadi flex */
+  justify-content: space-between; /* Mengatur jarak sejajar */
+}
+
+.custom-button-success:hover {
+  background-color: #008000; /* Latar belakang hijau saat tombol dihover */
+  color: #fff; /* Warna teks tetap putih saat dihover */
+}
+.alert {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #008000; /* Warna latar belakang hijau */
+  color: #fff; /* Warna teks putih */
+  text-align: center;
+  padding: 10px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform: translateY(-100%); /* Mulai dengan menggerakkan alert ke atas di luar layar */
+}
+
+.alert.active {
+  transform: translateY(0); /* Tampilkan alert dengan menggeser ke posisi awal */
+}
