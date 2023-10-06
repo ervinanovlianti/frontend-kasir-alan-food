@@ -80,7 +80,7 @@ const TambahMenu = () => {
     const [menuData, setMenuData] = useState({
         name: '',
         price: '',
-        image: null, // Menggunakan null sebagai placeholder
+        image: null, 
     });
 
     const handleInputChange = (e) => {
@@ -103,7 +103,7 @@ const TambahMenu = () => {
         const formData = new FormData();
         formData.append('name', menuData.name);
         formData.append('price', menuData.price);
-        formData.append('image', menuData.image); // Mengirim file gambar
+        formData.append('image', menuData.image); 
 
         // Kirim data menu ke backend
         axios.post('http://localhost:8000/api/menus', formData, {
@@ -131,14 +131,6 @@ const TambahMenu = () => {
         <div className='container-foods'>
             <h2>Tambah Menu Baru</h2>
             <form onSubmit={ handleSubmit }>
-                {/* <div>
-                                    <label htmlFor="nama">Nama Menu:</label>
-                                    <input
-                                        type="text"
-                                        id="nama"
-                                        required
-                                    />
-                                </div> */}
                 <div>
                     <label htmlFor="nama">Nama Menu:</label>
                     <input
@@ -158,21 +150,14 @@ const TambahMenu = () => {
                     />
                 </div>
                 <div>
-                    <label>Gambar (URL):</label>
-                    <input
-                        type="file"
-                        name="image"
-                        accept="image/*" // Hanya menerima file gambar
-                        onChange={ handleInputChange }
-                    />
-                </div>
-                {/* <div>
                     <label>Gambar:</label>
                     <label className="custom-file-upload">
                         <input type="file" accept=".jpg, .jpeg, .png" name='image' />
                     </label>
-                </div> */}
-                    <button type="submit">Simpan</button>
+                </div>
+                <div>
+                    <button type="submit" className='button-success'>Simpan</button>
+                </div>
             </form>
         </div>
     );
