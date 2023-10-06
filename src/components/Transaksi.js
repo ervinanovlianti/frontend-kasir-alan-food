@@ -18,7 +18,7 @@ const Transaksi = () => {
         // Mengambil data menu makanan dari API Laravel
         axios.get(`${API_BASE_URL}/api/menus`)
             .then((response) => {
-                setMenus(response.data.data); // Menyimpan data JSON ke dalam state (response.data.data mengacu pada data menu)
+                setMenus(response.data.data); 
                 setLoading(false);
             })
             .catch((error) => {
@@ -36,7 +36,6 @@ const Transaksi = () => {
     }
 
     const tambahKePesananSementara = (menu) => {
-        // Salin pesanan sementara yang ada
         const pesananBaru = { ...pesanan };
 
         // Periksa apakah menu sudah ada di pesanan
@@ -49,8 +48,6 @@ const Transaksi = () => {
             // Jika belum ada, buat entri baru dengan jumlah 1
             pesananBaru[menu.id] = 1;
         }
-
-        // Perbarui state pesanan
         setPesanan(pesananBaru);
     };
     const hitungSubtotal = (menuId) => {
@@ -68,22 +65,21 @@ const Transaksi = () => {
         return total;
     };
 
-    // Fungsi untuk membersihkan pesanan sementara
     const clearCart = () => {
-        setPesanan({}); // Mengatur pesanan kembali ke objek kosong
+        setPesanan({}); 
     };
 
     const printBill = () => {
-        window.print(); // Memanggil fungsi pencetakan bawaan browser
+        window.print();
     };
     const handleSaveBill = () => {
         setShowSavedModal(true);
 
-        // Atur waktu untuk menutup modal setelah beberapa detik (opsional)
         setTimeout(() => {
             setShowSavedModal(false);
-        }, 3000); // Contoh menutup modal setelah 3 detik
+        }, 3000); 
     };
+
 
     // Fungsi untuk menampilkan atau menyembunyikan modal "Total Charge"
     const toggleChargeModal = () => {
@@ -125,7 +121,7 @@ const Transaksi = () => {
                     total: total,
                     uang_pembeli: uangPembeliNumber,
                     kembalian: kembalianValue,
-                    order_items: orderItems, // Menggunakan array order_items yang telah dibuat
+                    order_items: orderItems, 
                 })
                 .then((response) => {
                     console.log('Pesanan berhasil disimpan:', response.data);
@@ -134,7 +130,6 @@ const Transaksi = () => {
                 })
                 .catch((error) => {
                     console.error('Error:', error);
-                    // Handle error, misalnya menampilkan pesan kesalahan kepada pengguna
                 });
         } else
         {
@@ -168,13 +163,19 @@ const Transaksi = () => {
                         )) }
                     </tbody>
                 </table>
+                <div>
+
+                    <button onClick={ clearCart } className='clear-button'>Clear Cart</button>
+                </div>
                 <div className="action-buttons">
-                    <button onClick={ clearCart } className='button'>Clear Cart</button>
-                    <button onClick={ printBill } className='button'>Print Bill</button>
-                    <button onClick={ handleSaveBill } className='button'>Save Bill</button> 
+                    <button onClick={ printBill } className='custom-button-success'>Print Bill</button>
+                    <button onClick={ handleSaveBill } className='custom-button-success'>Save Bill</button> 
+                </div>
+                <div className={ `alert ${showSavedModal ? 'active' : ''}` }>
+                    Bill berhasil disimpan
                 </div>
                 <div className="subtotal" style={ { marginTop: '20px' } }>
-                    <button className='button' onClick={ toggleChargeModal }>Charge Rp. { hitungSubtotalKeseluruhan().toLocaleString('id-ID') }</button>
+                    <button className='block-button' onClick={ toggleChargeModal }>Charge Rp. { hitungSubtotalKeseluruhan().toLocaleString('id-ID') }</button>
                 </div>
             </div>
             { showSavedModal && (
@@ -243,8 +244,8 @@ const Transaksi = () => {
                                 } }
                             />
                             <p>Kembalian: Rp. { kembalian.toLocaleString('id-ID') }</p>
-                            <button className='button' onClick={ toggleChargeModal }>Close</button>
-                            <button onClick={ handlePay }>Pay</button> {/* Tombol Pay */ }
+                            <button className='button-close' onClick={ toggleChargeModal }>Close</button>
+                            <button className='button' onClick={ handlePay }>Pay</button> 
                         </div>
                     </div>
                 </div>
