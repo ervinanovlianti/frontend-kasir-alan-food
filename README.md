@@ -1,70 +1,63 @@
-# Getting Started with Create React App
+# DOKUMENTASI APLIKASI FRONTEND ALAN FOOD
+## Pendahuluan
+Selamat datang di dokumentasi fitur frontend aplikasi kasir Alan Food.  Dokumen ini memberikan informasi tentang cara menggunakan antarmuka pengguna (UI) aplikasi ini.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Tech Stack
+- Library JavaScript: React.js
+- Bahasa Pemrograman: JavaScript (ES6)
+- Pustaka HTTP: Axios
+- Stylesheet: CSS 
 
-## Available Scripts
+## Daftar Fitur Utama
+- Daftar Menu Makanan
+- Penambahan Menu ke Pesanan
+- Menghitung Subtotal Pesanan
+- Mengelola Pesanan
+- Mencetak dan Menyimpan Bill
+- Melakukan Pembayaran
+  
+## 1. Daftar Menu Makanan
+Fitur ini memungkinkan Anda untuk melihat daftar menu makanan yang tersedia di restoran.
 
-In the project directory, you can run:
+### Cara Menggunakan:
+- Buka halaman utama aplikasi.
+- Anda akan melihat daftar menu makanan dengan gambar, nama, dan harga.
+- Klik pada menu makanan untuk menambahkannya ke pesanan Anda.
 
-### `npm start`
+## 2. Penambahan Menu ke Pesanan
+Dengan fitur ini, Anda dapat menambahkan menu makanan yang Anda pilih ke dalam pesanan sementara.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Cara Menggunakan:
+- Klik pada menu makanan yang ingin Anda pesan di daftar menu.
+- Jumlah pesanan akan muncul di pesanan sementara di sisi kanan.
+- Penambahan Menu
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 3. Menghitung Subtotal Pesanan
+Setiap kali Anda menambahkan atau menghapus item dari pesanan Anda, fitur ini akan menghitung subtotal pesanan secara otomatis.
 
-### `npm test`
+## Cara Menggunakan:
+- Lihat subtotal pesanan di bagian bawah pesanan sementara.
+- Subtotal Pesanan
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 4. Mengelola Pesanan
+Anda dapat mengelola pesanan Anda dengan fitur ini, termasuk membersihkan keranjang atau melanjutkan pembayaran.
 
-### `npm run build`
+### Cara Menggunakan:
+- Gunakan tombol "Clear Cart" untuk menghapus semua item dari pesanan sementara.
+- Gunakan tombol "Print Bill" untuk mencetak bill pesanan.
+- Gunakan tombol "Save Bill" untuk menyimpan bill pesanan.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 5. Mencetak dan Menyimpan Bill
+Anda dapat mencetak atau menyimpan bill pesanan Anda menggunakan fitur ini.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Cara Menggunakan:
+- Klik tombol "Print Bill" untuk mencetak bill.
+- Klik tombol "Save Bill" untuk menyimpan bill.
+- 
+## 6. Melakukan Pembayaran
+Untuk menyelesaikan pesanan, Anda dapat menggunakan fitur pembayaran ini.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Cara Menggunakan:
+- Isi kolom "Uang Pembeli (Rp)" dengan jumlah uang yang Anda bayarkan.
+- Klik tombol "Pay" untuk menyelesaikan pesanan.
+- Jika jumlah pembayaran mencukupi, bill akan disimpan, dan kembalian akan dihitung.
