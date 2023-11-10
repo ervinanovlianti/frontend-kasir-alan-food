@@ -12,7 +12,7 @@ th.id {
 }
 
 th.nama {
-    width: 40vw;
+    width: 20vw;
     text-align: center;
     padding: 10px;
 }
@@ -26,12 +26,6 @@ th.gambar {
 th.harga {
     width: 20vw;
     text-align: center;
-    padding: 10px;
-}
-
-tbody {
-    border: 2px solid black;
-    border-collapse: collapse;
     padding: 10px;
 }
 
@@ -271,4 +265,21 @@ td {
 
 .alert.active {
   transform: translateY(0); /* Tampilkan alert dengan menggeser ke posisi awal */
+}
+.button-danger{
+    background-color: #d10000;
+    color: white;
+    padding: 5px;
+    margin-right: 10px;
+    border-radius: 5px;
+    font-size: medium;
+}
+.button-info
+{
+    background-color: #53a6ff;
+    color: white;
+    padding: 5px;
+    margin-right: 10px;
+    border-radius: 5px;
+    text-decoration: none;
 }

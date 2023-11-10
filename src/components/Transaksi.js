@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import './Food.css';
 import axios from 'axios';
 
-
 const Transaksi = () => {
     const [menus, setMenus] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -115,7 +114,6 @@ const Transaksi = () => {
                 quantity: pesanan[menuId],
             }));
 
-            // Kirim data pesanan ke backend
             axios
                 .post(`${API_BASE_URL}/api/orders`, {
                     total: total,
@@ -127,6 +125,7 @@ const Transaksi = () => {
                     console.log('Pesanan berhasil disimpan:', response.data);
                     toggleChargeModal(); 
                     clearCart();
+                    // alert('Pembayaran berhasil!');
                 })
                 .catch((error) => {
                     console.error('Error:', error);
@@ -142,7 +141,7 @@ const Transaksi = () => {
             <div className="food-cards">
                 { menus.map((menu) => (
                     <div className="card" key={ menu.id } onClick={ () => tambahKePesananSementara(menu) }>
-                        <img src={ process.env.PUBLIC_URL + `/images/${menu.image}` } alt={ `Gambar ${menu.name}` } className="food-image" />
+                        <img src={ `http://localhost:8000/storage/images/${menu.image}` } alt={ menu.name } className='food-image'/>
                         <p className="food-name">{ menu.name }</p>
                         <p className="food-price">Rp. { menu.price.toLocaleString('id-ID') }</p>
                     </div>
@@ -150,11 +149,11 @@ const Transaksi = () => {
             </div>
             <div className="order-summary">
                 <h3>Pesanan</h3>
-                <table>
+                <table className='table table-hover'>
                     <tbody>
                         { Object.keys(pesanan).map((menuId) => (
                             <tr key={ menuId }>
-                                <td><img src={ process.env.PUBLIC_URL + `/images/${menus.find((menu) => menu.id === parseInt(menuId, 10)).image}` } alt={ menus.find((menu) => menu.id === parseInt(menuId, 10)).name } width="100" />
+                                <td><img src={ `http://localhost:8000/storage/images/${menus.find((menu) => menu.id === parseInt(menuId, 10)).image}` } alt={ menus.find((menu) => menu.id === parseInt(menuId, 10)).name } width="100" />
                                 </td>
                                 <td>{ menus.find((menu) => menu.id === parseInt(menuId, 10)).name }</td>
                                 <td>{ pesanan[menuId] }</td>
@@ -209,8 +208,7 @@ const Transaksi = () => {
                                         <td>
                                             <img
                                                 src={
-                                                    process.env.PUBLIC_URL +
-                                                    `/images/${menus.find(
+                                                    `http://localhost:8000/storage/images/${menus.find(
                                                         (menu) => menu.id === parseInt(menuId, 10)
                                                     ).image}`
                                                 }
